@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Odbijacz
 // @namespace    http://tampermonkey.net/
-// @version      0.2
+// @version      0.3
 // @description  try to take over the world!
 // @author       Poliakustyczny
 // @match        http://oldtimeturtle.com
@@ -44,7 +44,7 @@
 
         let parent = $('<li></li>').append(rfidButton);
         $(".navbar-custom-menu > ul").prepend(parent);
-        //$('#rfid-push').on('click', pushRfid());
+        $('#rfid-push').on('click', pushRfid);
     }
     
 
@@ -69,8 +69,20 @@
         $.ajax({
             url: 'http://oldtimeturtle.com/rfid/' + rfid,
             success: function(data){
-               console.log('rfid pushed');
+               changeButtonStatus();
             }
         });
+    }
+
+    function changeButtonStatus(){
+        let status = checkStatus();
+        if(status){
+            color = 'btn-success';
+        } else {
+            color = 'btn-danger'
+        }
+
+        $('#rfid-push').removeClass('btn-success btn-danger');
+        $('#rfid-push').addClass(color);
     }
 })();
