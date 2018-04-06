@@ -1,10 +1,12 @@
 // ==UserScript==
 // @name         Odbijacz
-// @namespace    http://tampermonkey.net/
-// @version      0.3
-// @description  try to take over the world!
+// @namespace    http://https://github.com/poliakustyczny/odbijacz/
+// @updateURL    https://raw.githubusercontent.com/poliakustyczny/odbijacz/master/odbijacz.js
+// @version      0.3.1
+// @description  Odbijacz do OTT
 // @author       Poliakustyczny
 // @match        http://oldtimeturtle.com
+// @match        http://oldtimeturtle.com/*
 // @match        http://oldtimeturtle.com/users/edit
 // @grant        none
 // @require      https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js
