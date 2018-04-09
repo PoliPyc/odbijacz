@@ -2,12 +2,11 @@
 // @name         Odbijacz
 // @namespace    http://https://github.com/poliakustyczny/odbijacz/
 // @updateURL    https://raw.githubusercontent.com/poliakustyczny/odbijacz/master/odbijacz.js
-// @version      0.3.1
+// @version      0.3.2
 // @description  Odbijacz do OTT
 // @author       Poliakustyczny
-// @match        http://oldtimeturtle.com
-// @match        http://oldtimeturtle.com/*
-// @match        http://oldtimeturtle.com/users/edit
+// @match        https://oldtimeturtle.com
+// @match        https://oldtimeturtle.com/*
 // @grant        none
 // @require      https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js
 // ==/UserScript==
@@ -32,9 +31,7 @@
         color = 'btn-danger'
     }
 
-    console.log(status);
     if(rfid){
-        console.log(rfid);
         let rfidButton = $('<button/>',
         {
             id: 'rfid-push',
@@ -51,16 +48,17 @@
     
 
     function checkStatus(){
-        let status;
+        let matches = [];
         let userName = $('.user-panel .info p').text();
-
+        let reg = new RegExp(userName, "igm");
         $.ajax({
-            url: 'http://oldtimeturtle.com/all',
+            url: 'https://oldtimeturtle.com/all',
+            async: false,
             success: function(data){
-               status = data.indexOf(userName);
+               matches = data.match(reg);
             }
         });
-        if(status === -1){
+        if(matches.length < 3){
             return false;
         } else {
             return true;
@@ -69,7 +67,7 @@
 
     function pushRfid(){
         $.ajax({
-            url: 'http://oldtimeturtle.com/rfid/' + rfid,
+            url: 'https://oldtimeturtle.com/rfid/' + rfid,
             success: function(data){
                changeButtonStatus();
             }
@@ -88,3 +86,4 @@
         $('#rfid-push').addClass(color);
     }
 })();
+
